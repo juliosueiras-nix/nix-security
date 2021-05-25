@@ -1,0 +1,856 @@
+diff --git a/Fern-Wifi-Cracker/core/fern.py b/Fern-Wifi-Cracker/core/fern.py
+index 63f792f..ea497e8 100644
+--- a/Fern-Wifi-Cracker/core/fern.py
++++ b/Fern-Wifi-Cracker/core/fern.py
+@@ -23,6 +23,7 @@ from core.settings import *
+ from gui.main_window import *
+ 
+ __version__ = 3.12
++__resource_path__ = os.environ['RESOURCE_PATH']
+ 
+ 
+ #
+@@ -439,7 +440,8 @@ class mainwindow(QtWidgets.QDialog, Ui_Dialog):
+ 
+     def interface_cards_found(self):
+         self.interface_combo.addItem('Select Interface')
+-        interface_icon = QtGui.QIcon("%s/resources/mac_address.png" % (os.getcwd()))
++        
++        interface_icon = QtGui.QIcon("%s/resources/mac_address.png" % (__resource_path__))
+         for interface in self.interface_cards:
+             self.interface_combo.addItem(interface_icon, interface)
+         self.mon_label.setText("<font color=red>Select an interface card</font>")
+@@ -449,7 +451,7 @@ class mainwindow(QtWidgets.QDialog, Ui_Dialog):
+     # Animates monitor mode by loading gif
+     #
+     def animate_monitor_mode(self, status):
+-        self.movie = QtGui.QMovie("%s/resources/loading.gif" % (os.getcwd()))
++        self.movie = QtGui.QMovie("%s/resources/loading.gif" % (__resource_path__))
+         self.movie.start()
+         self.loading_label.setMovie(self.movie)
+ 
+diff --git a/Fern-Wifi-Cracker/core/toolbox/fern_cookie_hijacker.py b/Fern-Wifi-Cracker/core/toolbox/fern_cookie_hijacker.py
+index 8bacf60..f4a4742 100644
+--- a/Fern-Wifi-Cracker/core/toolbox/fern_cookie_hijacker.py
++++ b/Fern-Wifi-Cracker/core/toolbox/fern_cookie_hijacker.py
+@@ -13,6 +13,8 @@ from gui.cookie_hijacker import *
+ from core.toolbox.mozilla_cookie_core import *
+ from core.toolbox.cookie_hijacker_core import *
+ 
++__resource_path__ = os.environ['RESOURCE_PATH']
++
+ 
+ class Fern_Cookie_Hijacker(QtWidgets.QDialog,Ui_cookie_hijacker):
+     emit_buffer_red_light_signal = QtCore.pyqtSignal()
+@@ -37,8 +39,8 @@ class Fern_Cookie_Hijacker(QtWidgets.QDialog,Ui_cookie_hijacker):
+ 
+         self.monitor_interface = str()              # wlan0, mon0 etc
+ 
+-        self.red_light = QtGui.QPixmap("%s/resources/red_led.png"%(os.getcwd()))
+-        self.green_light = QtGui.QPixmap("%s/resources/green_led.png"%(os.getcwd()))
++        self.red_light = QtGui.QPixmap("%s/resources/red_led.png"%(__resource_path__))
++        self.green_light = QtGui.QPixmap("%s/resources/green_led.png"%(__resource_path__))
+ 
+         self.refresh_interface()                    # Display list of wireless interface cards on startup
+         self.clear_items()                          # Clear design items from cookie tree widget
+diff --git a/Fern-Wifi-Cracker/core/toolbox/fern_ray_fusion.py b/Fern-Wifi-Cracker/core/toolbox/fern_ray_fusion.py
+index 3eb14ad..ae50206 100644
+--- a/Fern-Wifi-Cracker/core/toolbox/fern_ray_fusion.py
++++ b/Fern-Wifi-Cracker/core/toolbox/fern_ray_fusion.py
+@@ -11,6 +11,8 @@ from core.toolbox.bruteforce_core import *
+ 
+ tutorial_link = "http://www.youtube.com/watch?v=_ztQQWMoVX4"    # Video Tutorial link
+ 
++__resource_path__ = os.environ['RESOURCE_PATH']
++
+ 
+ class Ray_Fusion(QtWidgets.QDialog,Ui_ray_fusion):
+     def __init__(self):
+@@ -26,11 +28,11 @@ class Ray_Fusion(QtWidgets.QDialog,Ui_ray_fusion):
+         self.table_index = 0
+         self.bruteforce_core = Bruteforce_Attack()      # Bruteforce Attack Class
+ 
+-        self.http_https_pixmap = QtGui.QPixmap("%s/resources/Page-World.ico" % (os.getcwd()))
+-        self.telnet_pixmap = QtGui.QPixmap("%s/resources/Application-Osx-Terminal.ico" % (os.getcwd()))
+-        self.ftp_pixmap = QtGui.QPixmap("%s/resources/Ftp.ico" % (os.getcwd()))
+-        self.red_led = QtGui.QPixmap("%s/resources/red_led.png" % (os.getcwd()))
+-        self.green_led = QtGui.QPixmap("%s/resources/green_led.png" % (os.getcwd()))
++        self.http_https_pixmap = QtGui.QPixmap("%s/resources/Page-World.ico" % (__resource_path__))
++        self.telnet_pixmap = QtGui.QPixmap("%s/resources/Application-Osx-Terminal.ico" % (__resource_path__))
++        self.ftp_pixmap = QtGui.QPixmap("%s/resources/Ftp.ico" % (__resource_path__))
++        self.red_led = QtGui.QPixmap("%s/resources/red_led.png" % (__resource_path__))
++        self.green_led = QtGui.QPixmap("%s/resources/green_led.png" % (__resource_path__))
+ 
+         self.http_https_radio.clicked.connect(self.HTTP_HTTPS_Mode)
+         self.telnet_radio.clicked.connect(self.TELNET_Mode)
+diff --git a/Fern-Wifi-Cracker/core/variables.py b/Fern-Wifi-Cracker/core/variables.py
+index eb88d18..55cc1a7 100644
+--- a/Fern-Wifi-Cracker/core/variables.py
++++ b/Fern-Wifi-Cracker/core/variables.py
+@@ -5,6 +5,8 @@ import shutil
+ 
+ from core.fern import *
+ 
++__resource_path__ = os.environ['RESOURCE_PATH']
++
+ ############# WEP/WPA/WPS GLOBAL VARIABLES #################
+ 
+ #
+@@ -125,7 +127,7 @@ body,td,th {
+ <p>* Press the &quot;Track&quot; button when you're done.</p>
+ </body>
+ </html>
+-'''%(os.getcwd())
++'''%(__resource_path__)
+ 
+ html_instructions_message = '''<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ <html xmlns="http://www.w3.org/1999/xhtml">
+@@ -148,7 +150,7 @@ body,td,th {
+ <p>* You can insert mac-addresses manually by using the &quot;Insert Mac Address&quot; radio button then inputing it into the combo-box.</p>
+ </body>
+ </html>
+-'''%(os.getcwd())
++'''%(__resource_path__)
+ 
+ 
+ 
+diff --git a/Fern-Wifi-Cracker/core/wep.py b/Fern-Wifi-Cracker/core/wep.py
+index 1766dbc..09e3392 100644
+--- a/Fern-Wifi-Cracker/core/wep.py
++++ b/Fern-Wifi-Cracker/core/wep.py
+@@ -14,6 +14,8 @@ from gui.attack_panel import *
+ 
+ from core import variables
+ 
++__resource_path__ = os.environ['RESOURCE_PATH']
++
+ #
+ # Wep Attack window class for decrypting wep keys
+ #
+@@ -74,7 +76,7 @@ class wep_attack_dialog(QtWidgets.QDialog,Ui_attack_panel):
+         self.wps_update_timer.timeout.connect(self.set_if_WPS_Support)
+         self.wps_update_timer.start(1000)
+ 
+-        self.wifi_icon = QtGui.QPixmap("%s/resources/radio-wireless-signal-icone-5919-96.png"%os.getcwd())
++        self.wifi_icon = QtGui.QPixmap("%s/resources/radio-wireless-signal-icone-5919-96.png"%__resource_path__)
+ 
+         self.new_access_point_detected_signal.connect(self.display_new_access_point)
+ 
+@@ -135,7 +137,7 @@ class wep_attack_dialog(QtWidgets.QDialog,Ui_attack_panel):
+         self.attack_type_combo.addItems(attack_type)
+ 
+         self.keys_cracked_label.setVisible(False)
+-        self.setStyleSheet('background-image: url("%s/resources/binary_2.png");color:rgb(172,172,172);'%(os.getcwd()))
++        self.setStyleSheet('background-image: url("%s/resources/binary_2.png");color:rgb(172,172,172);'%(__resource_path__))
+         self.attack_type_combo.setStyleSheet('color: rgb(172,172,172);background-color: black;font: %spt;'%(font_size()))
+ 
+         ############## ATACK PANEL METHODS #####################
+@@ -408,7 +410,7 @@ class wep_attack_dialog(QtWidgets.QDialog,Ui_attack_panel):
+         self.progressBar.setValue(0)
+         self.wep_disable_items()
+         icon = QtGui.QIcon()
+-        icon.addPixmap(QtGui.QPixmap("%s/resources/stop.png"%(os.getcwd())))
++        icon.addPixmap(QtGui.QPixmap("%s/resources/stop.png"%(__resource_path__)))
+         self.attack_button.setIcon(icon)
+         self.attack_button.setText('Stop')
+         self.thread_control = False
+@@ -420,7 +422,7 @@ class wep_attack_dialog(QtWidgets.QDialog,Ui_attack_panel):
+         variables.exec_command('killall aircrack-ng')
+         variables.exec_command('killall aireplay-ng')
+         icon = QtGui.QIcon()
+-        icon.addPixmap(QtGui.QPixmap("%s/resources/wifi_4.png"%(os.getcwd())))
++        icon.addPixmap(QtGui.QPixmap("%s/resources/wifi_4.png"%(__resource_path__)))
+         self.attack_button.setIcon(icon)
+         self.attack_button.setText("Attack")
+ 
+@@ -524,7 +526,7 @@ class wep_attack_dialog(QtWidgets.QDialog,Ui_attack_panel):
+         self.key_label.setText('<font color=red>WEP KEY: %s</font>'%(self.WEP))
+         self.finished_label.setEnabled(True)
+         icon = QtGui.QIcon()
+-        icon.addPixmap(QtGui.QPixmap("%s/resources/wifi_4.png"%(os.getcwd())))
++        icon.addPixmap(QtGui.QPixmap("%s/resources/wifi_4.png"%(__resource_path__)))
+         self.attack_button.setIcon(icon)
+         self.attack_button.setText('Attack')
+         self.thread_control = True
+diff --git a/Fern-Wifi-Cracker/core/wpa.py b/Fern-Wifi-Cracker/core/wpa.py
+index 8fbf1c3..c5a9f8d 100644
+--- a/Fern-Wifi-Cracker/core/wpa.py
++++ b/Fern-Wifi-Cracker/core/wpa.py
+@@ -1,6 +1,7 @@
+ import re
+ import time
+ import subprocess
++import os
+ import threading
+ from xml.etree import ElementTree
+ from core.fern import *
+@@ -12,6 +13,9 @@ from core.variables import *
+ from core import variables
+ 
+ from PyQt5 import QtCore, QtGui, QtWidgets
++
++__resource_path__ = os.environ['RESOURCE_PATH']
++
+ #
+ # Wpa Attack window class for decrypting wep keys
+ #
+@@ -119,7 +123,7 @@ class wpa_attack_dialog(QtWidgets.QDialog,Ui_attack_panel):
+ 
+         self.access_points = set()
+         self.mac_address = str()
+-        self.wifi_icon = QtGui.QPixmap("%s/resources/radio-wireless-signal-icone-5919-96.png"%os.getcwd())
++        self.wifi_icon = QtGui.QPixmap("%s/resources/radio-wireless-signal-icone-5919-96.png"%__resource_path__)
+ 
+         self.new_access_point_detected_signal.connect(self.display_new_access_point)
+         self.ap_listwidget.itemSelectionChanged.connect(self.display_selected_target)
+@@ -133,7 +137,7 @@ class wpa_attack_dialog(QtWidgets.QDialog,Ui_attack_panel):
+ 
+         self.keys_cracked_label.setVisible(False)
+         self.display_current_wordlist()                                                             # Display previous wordlist
+-        self.setStyleSheet('background-image: url("%s/resources/binary_2.png");color:rgb(172,172,172);'%(os.getcwd()))
++        self.setStyleSheet('background-image: url("%s/resources/binary_2.png");color:rgb(172,172,172);'%(__resource_path__))
+         self.attack_type_combo.setStyleSheet('color: rgb(172,172,172);background-color: black;font: %spt;'%(font_size()))
+         self.set_Key_Clipbord()
+ 
+@@ -375,7 +379,7 @@ class wpa_attack_dialog(QtWidgets.QDialog,Ui_attack_panel):
+         self.attack_button.clicked.disconnect(self.cancel_wpa_attack)
+         self.attack_button.clicked.connect(self.launch_attack)
+         icon = QtGui.QIcon()
+-        icon.addPixmap(QtGui.QPixmap("%s/resources/wifi_4.png"%(os.getcwd())))
++        icon.addPixmap(QtGui.QPixmap("%s/resources/wifi_4.png"%(__resource_path__)))
+         self.attack_button.setIcon(icon)
+         self.attack_button.setText('Attack')
+         self.thread_control = True
+@@ -428,7 +432,7 @@ class wpa_attack_dialog(QtWidgets.QDialog,Ui_attack_panel):
+ 
+     def wpa_key_found(self):
+         icon = QtGui.QIcon()
+-        icon.addPixmap(QtGui.QPixmap("%s/resources/wifi_4.png"%(os.getcwd())))
++        icon.addPixmap(QtGui.QPixmap("%s/resources/wifi_4.png"%(__resource_path__)))
+         self.attack_button.setIcon(icon)
+         self.attack_button.setText('Attack')
+ 
+@@ -696,7 +700,7 @@ class wpa_attack_dialog(QtWidgets.QDialog,Ui_attack_panel):
+             self.attack_button.clicked.disconnect(self.launch_attack)
+             self.attack_button.clicked.connect(self.cancel_wpa_attack)
+             icon = QtGui.QIcon()
+-            icon.addPixmap(QtGui.QPixmap("%s/resources/stop.png"%(os.getcwd())))
++            icon.addPixmap(QtGui.QPixmap("%s/resources/stop.png"%(__resource_path__)))
+             self.attack_button.setIcon(icon)
+             self.attack_button.setText('Stop')
+             self.started = True
+@@ -755,7 +759,7 @@ class wpa_attack_dialog(QtWidgets.QDialog,Ui_attack_panel):
+                 self.attack_button.clicked.disconnect(self.launch_attack)
+                 self.attack_button.clicked.connect(self.cancel_wpa_attack)
+                 icon = QtGui.QIcon()
+-                icon.addPixmap(QtGui.QPixmap("%s/resources/stop.png"%(os.getcwd())))
++                icon.addPixmap(QtGui.QPixmap("%s/resources/stop.png"%(__resource_path__)))
+                 self.attack_button.setIcon(icon)
+                 self.attack_button.setText('Stop')
+                 self.started = True
+diff --git a/Fern-Wifi-Cracker/execute.py b/Fern-Wifi-Cracker/execute.py
+index e918885..aeb242c 100644
+--- a/Fern-Wifi-Cracker/execute.py
++++ b/Fern-Wifi-Cracker/execute.py
+@@ -7,6 +7,7 @@ import shutil
+ import importlib
+ import subprocess
+ 
++__resource_path__ = os.environ['RESOURCE_PATH']
+ 
+ def install_prerequsites():
+     modules = {"scapy":"scapy","PyQt5":"pyqt5"}
+@@ -113,7 +114,7 @@ if __name__ == '__main__':
+     app = QtWidgets.QApplication(sys.argv)
+     run = fern.mainwindow()
+ 
+-    pixmap = QtGui.QPixmap("%s/resources/screen_splash.png" % (os.getcwd()))
++    pixmap = QtGui.QPixmap("%s/resources/screen_splash.png" % (__resource_path__))
+     screen_splash = QtWidgets.QSplashScreen(pixmap, QtCore.Qt.WindowStaysOnTopHint)
+     screen_splash.setMask(pixmap.mask())
+     screen_splash.show()
+diff --git a/Fern-Wifi-Cracker/gui/attack_panel.py b/Fern-Wifi-Cracker/gui/attack_panel.py
+index c4c4def..7c95128 100644
+--- a/Fern-Wifi-Cracker/gui/attack_panel.py
++++ b/Fern-Wifi-Cracker/gui/attack_panel.py
+@@ -12,6 +12,8 @@ from PyQt5 import QtCore, QtWidgets, QtGui
+ 
+ font_setting = font_size()
+ 
++__resource_path__ = os.environ['RESOURCE_PATH']
++
+ try:
+     _fromUtf8 = QtCore.QString.fromUtf8
+ except AttributeError:
+@@ -22,7 +24,7 @@ class Ui_attack_panel(object):
+         attack_panel.setObjectName(_fromUtf8("attack_panel"))
+         attack_panel.resize(762, 549)
+         icon = QtGui.QIcon()
+-        icon.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/wifi_4.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/wifi_4.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         attack_panel.setWindowIcon(icon)
+         self.verticalLayout_13 = QtWidgets.QVBoxLayout(attack_panel)
+         self.verticalLayout_13.setObjectName(_fromUtf8("verticalLayout_13"))
+diff --git a/Fern-Wifi-Cracker/gui/attack_settings.py b/Fern-Wifi-Cracker/gui/attack_settings.py
+index 0131de7..63f3ecf 100644
+--- a/Fern-Wifi-Cracker/gui/attack_settings.py
++++ b/Fern-Wifi-Cracker/gui/attack_settings.py
+@@ -5,6 +5,7 @@ from PyQt5 import QtCore, QtWidgets, QtGui
+ 
+ font_setting = font_size()
+ 
++__resource_path__ = os.environ['RESOURCE_PATH']
+ 
+ try:
+     _fromUtf8 = QtCore.QString.fromUtf8
+@@ -16,7 +17,7 @@ class Ui_attack_settings(object):
+         attack_settings.setObjectName(_fromUtf8("attack_settings"))
+         attack_settings.resize(400, 199)
+         icon = QtGui.QIcon()
+-        icon.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/mac_address.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/mac_address.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         attack_settings.setWindowIcon(icon)
+         self.verticalLayout_3 = QtWidgets.QVBoxLayout(attack_settings)
+         self.verticalLayout_3.setObjectName(_fromUtf8("verticalLayout_3"))
+diff --git a/Fern-Wifi-Cracker/gui/cookie_hijacker.py b/Fern-Wifi-Cracker/gui/cookie_hijacker.py
+index 1c1aba5..2a8b111 100644
+--- a/Fern-Wifi-Cracker/gui/cookie_hijacker.py
++++ b/Fern-Wifi-Cracker/gui/cookie_hijacker.py
+@@ -4,6 +4,8 @@ from PyQt5 import QtCore, QtWidgets, QtGui
+ 
+ font_setting = font_size()
+ 
++__resource_path__ = os.environ['RESOURCE_PATH']
++
+ 
+ try:
+     _fromUtf8 = QtCore.QString.fromUtf8
+@@ -21,7 +23,7 @@ class Ui_cookie_hijacker(object):
+         self.horizontalLayout_3.setObjectName(_fromUtf8("horizontalLayout_3"))
+         self.label_9 = QtWidgets.QLabel(cookie_hijacker)
+         self.label_9.setText(_fromUtf8(""))
+-        self.label_9.setPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/cookies-icon.png"%(os.getcwd()))))
++        self.label_9.setPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/cookies-icon.png"%(__resource_path__))))
+         self.label_9.setObjectName(_fromUtf8("label_9"))
+         self.horizontalLayout_3.addWidget(self.label_9)
+         self.verticalLayout_7 = QtWidgets.QVBoxLayout()
+@@ -77,7 +79,7 @@ class Ui_cookie_hijacker(object):
+         font.setPointSize(font_setting)
+         self.refresh_button.setFont(font)
+         icon = QtGui.QIcon()
+-        icon.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/PNG-Refresh.png-256x256.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/PNG-Refresh.png-256x256.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         self.refresh_button.setIcon(icon)
+         self.refresh_button.setIconSize(QtCore.QSize(22, 23))
+         self.refresh_button.setObjectName(_fromUtf8("refresh_button"))
+@@ -105,7 +107,7 @@ class Ui_cookie_hijacker(object):
+         self.horizontalLayout_4.setObjectName(_fromUtf8("horizontalLayout_4"))
+         self.monitor_interface_led = QtWidgets.QLabel(cookie_hijacker)
+         self.monitor_interface_led.setText(_fromUtf8(""))
+-        self.monitor_interface_led.setPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/red_led.png"%(os.getcwd()))))
++        self.monitor_interface_led.setPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/red_led.png"%(__resource_path__))))
+         self.monitor_interface_led.setObjectName(_fromUtf8("monitor_interface_led"))
+         self.horizontalLayout_4.addWidget(self.monitor_interface_led)
+         self.monitor_interface_label = QtWidgets.QLabel(cookie_hijacker)
+@@ -127,7 +129,7 @@ class Ui_cookie_hijacker(object):
+         self.horizontalLayout_6.setObjectName(_fromUtf8("horizontalLayout_6"))
+         self.sniffing_status_led = QtWidgets.QLabel(cookie_hijacker)
+         self.sniffing_status_led.setText(_fromUtf8(""))
+-        self.sniffing_status_led.setPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/red_led.png"%(os.getcwd()))))
++        self.sniffing_status_led.setPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/red_led.png"%(__resource_path__))))
+         self.sniffing_status_led.setObjectName(_fromUtf8("sniffing_status_led"))
+         self.horizontalLayout_6.addWidget(self.sniffing_status_led)
+         self.sniffing_status_label = QtWidgets.QLabel(cookie_hijacker)
+@@ -147,7 +149,7 @@ class Ui_cookie_hijacker(object):
+         self.horizontalLayout_5.setObjectName(_fromUtf8("horizontalLayout_5"))
+         self.cookie_detection_led = QtWidgets.QLabel(cookie_hijacker)
+         self.cookie_detection_led.setText(_fromUtf8(""))
+-        self.cookie_detection_led.setPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/red_led.png"%(os.getcwd()))))
++        self.cookie_detection_led.setPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/red_led.png"%(__resource_path__))))
+         self.cookie_detection_led.setObjectName(_fromUtf8("cookie_detection_led"))
+         self.horizontalLayout_5.addWidget(self.cookie_detection_led)
+         self.cookie_detection_label = QtWidgets.QLabel(cookie_hijacker)
+@@ -252,7 +254,7 @@ class Ui_cookie_hijacker(object):
+         item_0.setFont(0, font)
+         item_1 = QtWidgets.QTreeWidgetItem(item_0)
+         icon1 = QtGui.QIcon()
+-        icon1.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/green_led.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon1.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/green_led.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         item_1.setIcon(0, icon1)
+         item_2 = QtWidgets.QTreeWidgetItem(item_1)
+         item_1 = QtWidgets.QTreeWidgetItem(item_0)
+diff --git a/Fern-Wifi-Cracker/gui/database.py b/Fern-Wifi-Cracker/gui/database.py
+index a44f30f..837de1b 100644
+--- a/Fern-Wifi-Cracker/gui/database.py
++++ b/Fern-Wifi-Cracker/gui/database.py
+@@ -2,6 +2,8 @@ import os
+ from gui.main_window import font_size
+ from PyQt5 import QtCore, QtWidgets, QtGui
+ 
++__resource_path__ = os.environ['RESOURCE_PATH']
++
+ try:
+     _fromUtf8 = QtCore.QString.fromUtf8
+ except AttributeError:
+@@ -14,7 +16,7 @@ class database_ui(object):
+         database.setObjectName(_fromUtf8("database"))
+         database.resize(556, 290)
+         icon = QtGui.QIcon()
+-        icon.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Database-64.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Database-64.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         database.setWindowIcon(icon)
+         self.verticalLayout_2 = QtWidgets.QVBoxLayout(database)
+         self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
+@@ -43,27 +45,27 @@ class database_ui(object):
+         self.key_table.setColumnCount(5)
+         self.key_table.setRowCount(0)
+         icon1 = QtGui.QIcon()
+-        icon1.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/router-icone-7671-128.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon1.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/router-icone-7671-128.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         item = QtWidgets.QTableWidgetItem()
+         self.key_table.setHorizontalHeaderItem(0, item)
+         item.setIcon(icon1)
+         icon2 = QtGui.QIcon()
+-        icon2.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/mac_address.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon2.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/mac_address.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         item = QtWidgets.QTableWidgetItem()
+         self.key_table.setHorizontalHeaderItem(1, item)
+         item.setIcon(icon2)
+         icon3 = QtGui.QIcon()
+-        icon3.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/binary.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon3.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/binary.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         item = QtWidgets.QTableWidgetItem()
+         self.key_table.setHorizontalHeaderItem(2, item)
+         item.setIcon(icon3)
+         icon4 = QtGui.QIcon()
+-        icon4.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/login_128.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon4.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/login_128.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         item = QtWidgets.QTableWidgetItem()
+         self.key_table.setHorizontalHeaderItem(3, item)
+         item.setIcon(icon4)
+         icon5 = QtGui.QIcon()
+-        icon5.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/wifi_5.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon5.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/wifi_5.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         item = QtWidgets.QTableWidgetItem()
+         self.key_table.setHorizontalHeaderItem(4, item)
+         item.setIcon(icon5)
+diff --git a/Fern-Wifi-Cracker/gui/fern_pro_tip.py b/Fern-Wifi-Cracker/gui/fern_pro_tip.py
+index 0802fc3..81ab131 100644
+--- a/Fern-Wifi-Cracker/gui/fern_pro_tip.py
++++ b/Fern-Wifi-Cracker/gui/fern_pro_tip.py
+@@ -12,6 +12,8 @@ from PyQt5 import QtCore, QtWidgets, QtGui
+ 
+ font_setting = font_size()
+ 
++__resource_path__ = os.environ['RESOURCE_PATH']
++
+ try:
+     _encoding = 0
+     def _translate(context, text, disambig):
+@@ -30,7 +32,7 @@ class Fern_Pro_Tip_ui(object):
+         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+         self.label_2 = QtWidgets.QLabel(Dialog)
+         self.label_2.setText("")
+-        self.label_2.setPixmap(QtGui.QPixmap("%s/resources/fern_pro.png"%(os.getcwd())))
++        self.label_2.setPixmap(QtGui.QPixmap("%s/resources/fern_pro.png"%(__resource_path__)))
+         self.label_2.setObjectName("label_2")
+         self.horizontalLayout_3.addWidget(self.label_2)
+         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
+diff --git a/Fern-Wifi-Cracker/gui/font_settings.py b/Fern-Wifi-Cracker/gui/font_settings.py
+index 6042c2a..1f905f7 100644
+--- a/Fern-Wifi-Cracker/gui/font_settings.py
++++ b/Fern-Wifi-Cracker/gui/font_settings.py
+@@ -9,13 +9,15 @@
+ import os
+ from PyQt5.QtWidgets import *
+ from PyQt5 import QtCore, QtWidgets, QtGui
++
++__resource_path__ = os.environ['RESOURCE_PATH']
+ 
+ class font_dialog(object):
+     def setupUi(self, Dialog):
+         Dialog.setObjectName("Dialog")
+         Dialog.resize(235, 105)
+         icon = QtGui.QIcon()
+-        icon.addPixmap(QtGui.QPixmap("%s/resources/1295906241_preferences-desktop-font.png"%(os.getcwd())), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon.addPixmap(QtGui.QPixmap("%s/resources/1295906241_preferences-desktop-font.png"%(__resource_path__)), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         Dialog.setWindowIcon(icon)
+         self.verticalLayout_2 = QtWidgets.QVBoxLayout(Dialog)
+         self.verticalLayout_2.setObjectName("verticalLayout_2")
+diff --git a/Fern-Wifi-Cracker/gui/geotrack.py b/Fern-Wifi-Cracker/gui/geotrack.py
+index 087f6af..1afa277 100644
+--- a/Fern-Wifi-Cracker/gui/geotrack.py
++++ b/Fern-Wifi-Cracker/gui/geotrack.py
+@@ -3,7 +3,7 @@ from gui.main_window import font_size
+ from PyQt5 import QtCore, QtWidgets, QtGui
+ 
+ font_setting = font_size()
+-
++__resource_path__ = os.environ['RESOURCE_PATH']
+ 
+ try:
+     _fromUtf8 = QtCore.QString.fromUtf8
+@@ -15,7 +15,7 @@ class Ui_fern_geotrack(object):
+         fern_geotrack.setObjectName(_fromUtf8("fern_geotrack"))
+         fern_geotrack.resize(823, 630)
+         icon = QtGui.QIcon()
+-        icon.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/map.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/map.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         fern_geotrack.setWindowIcon(icon)
+         self.verticalLayout_5 = QtWidgets.QVBoxLayout(fern_geotrack)
+         self.verticalLayout_5.setObjectName(_fromUtf8("verticalLayout_5"))
+diff --git a/Fern-Wifi-Cracker/gui/main_window.py b/Fern-Wifi-Cracker/gui/main_window.py
+index 0fd770d..df1dc5a 100644
+--- a/Fern-Wifi-Cracker/gui/main_window.py
++++ b/Fern-Wifi-Cracker/gui/main_window.py
+@@ -3,7 +3,7 @@ import sys
+ import subprocess
+ from PyQt5 import QtCore, QtWidgets, QtGui
+ 
+-
++__resource_path__ = os.environ['RESOURCE_PATH']
+ #
+ # Create default font setting
+ #
+@@ -34,7 +34,7 @@ class Ui_Dialog(object):
+         sizePolicy.setHeightForWidth(Dialog.sizePolicy().hasHeightForWidth())
+         Dialog.setSizePolicy(sizePolicy)
+         icon = QtGui.QIcon()
+-        icon.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/icon.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/icon.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         Dialog.setWindowIcon(icon)
+         self.verticalLayout_30 = QtWidgets.QVBoxLayout(Dialog)
+         self.verticalLayout_30.setObjectName(_fromUtf8("verticalLayout_30"))
+@@ -51,7 +51,7 @@ class Ui_Dialog(object):
+         self.verticalLayout_26.setObjectName(_fromUtf8("verticalLayout_26"))
+         self.label_14 = QtWidgets.QLabel(Dialog)
+         self.label_14.setText(_fromUtf8(""))
+-        self.label_14.setPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/splash.png"%(os.getcwd()))))
++        self.label_14.setPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/splash.png"%(__resource_path__))))
+         self.label_14.setObjectName(_fromUtf8("label_14"))
+         self.verticalLayout_26.addWidget(self.label_14)
+         spacerItem = QtWidgets.QSpacerItem(20, 17, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+@@ -93,7 +93,7 @@ class Ui_Dialog(object):
+         self.update_button.setFont(font)
+         self.update_button.setText(_fromUtf8(""))
+         icon1 = QtGui.QIcon()
+-        icon1.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/1295008956_system-software-update.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon1.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/1295008956_system-software-update.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         self.update_button.setIcon(icon1)
+         self.update_button.setIconSize(QtCore.QSize(35, 34))
+         self.update_button.setObjectName(_fromUtf8("update_button"))
+@@ -169,7 +169,7 @@ class Ui_Dialog(object):
+         self.loading_label = QtWidgets.QLabel(Dialog)
+         self.loading_label.setEnabled(True)
+         self.loading_label.setText(_fromUtf8(""))
+-        self.loading_label.setPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/loading.gif"%(os.getcwd()))))
++        self.loading_label.setPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/loading.gif"%(__resource_path__))))
+         self.loading_label.setObjectName(_fromUtf8("loading_label"))
+         self.horizontalLayout_5.addWidget(self.loading_label)
+         self.verticalLayout_9 = QtWidgets.QVBoxLayout()
+@@ -204,7 +204,7 @@ class Ui_Dialog(object):
+         font.setPointSize(font_setting)
+         self.refresh_intfacebutton.setFont(font)
+         icon2 = QtGui.QIcon()
+-        icon2.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/PNG-Refresh.png-256x256.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon2.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/PNG-Refresh.png-256x256.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         self.refresh_intfacebutton.setIcon(icon2)
+         self.refresh_intfacebutton.setIconSize(QtCore.QSize(24, 23))
+         self.refresh_intfacebutton.setObjectName(_fromUtf8("refresh_intfacebutton"))
+@@ -246,7 +246,7 @@ class Ui_Dialog(object):
+         self.scan_button.setFont(font)
+         self.scan_button.setText(_fromUtf8(""))
+         icon3 = QtGui.QIcon()
+-        icon3.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/radio-wireless-signal-icone-5919-128.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon3.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/radio-wireless-signal-icone-5919-128.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         self.scan_button.setIcon(icon3)
+         self.scan_button.setIconSize(QtCore.QSize(40, 42))
+         self.scan_button.setObjectName(_fromUtf8("scan_button"))
+@@ -292,7 +292,7 @@ class Ui_Dialog(object):
+         font.setWeight(75)
+         self.wep_button.setFont(font)
+         icon4 = QtGui.QIcon()
+-        icon4.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/wifi_2.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon4.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/wifi_2.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         self.wep_button.setIcon(icon4)
+         self.wep_button.setIconSize(QtCore.QSize(67, 62))
+         self.wep_button.setObjectName(_fromUtf8("wep_button"))
+@@ -335,7 +335,7 @@ class Ui_Dialog(object):
+         font.setWeight(75)
+         self.wpa_button.setFont(font)
+         icon5 = QtGui.QIcon()
+-        icon5.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/wifi_6.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon5.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/wifi_6.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         self.wpa_button.setIcon(icon5)
+         self.wpa_button.setIconSize(QtCore.QSize(67, 62))
+         self.wpa_button.setObjectName(_fromUtf8("wpa_button"))
+@@ -377,7 +377,7 @@ class Ui_Dialog(object):
+         font.setWeight(75)
+         self.database_button.setFont(font)
+         icon6 = QtGui.QIcon()
+-        icon6.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Database-64.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon6.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Database-64.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         self.database_button.setIcon(icon6)
+         self.database_button.setIconSize(QtCore.QSize(67, 62))
+         self.database_button.setObjectName(_fromUtf8("database_button"))
+@@ -418,7 +418,7 @@ class Ui_Dialog(object):
+         font.setWeight(75)
+         self.tool_button.setFont(font)
+         icon7 = QtGui.QIcon()
+-        icon7.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/1295905972_tool_kit.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon7.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/1295905972_tool_kit.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         self.tool_button.setIcon(icon7)
+         self.tool_button.setIconSize(QtCore.QSize(67, 62))
+         self.tool_button.setObjectName(_fromUtf8("tool_button"))
+diff --git a/Fern-Wifi-Cracker/gui/ray_fusion.py b/Fern-Wifi-Cracker/gui/ray_fusion.py
+index 10942ae..5ac517a 100644
+--- a/Fern-Wifi-Cracker/gui/ray_fusion.py
++++ b/Fern-Wifi-Cracker/gui/ray_fusion.py
+@@ -4,6 +4,7 @@ from PyQt5 import QtCore, QtWidgets, QtGui
+ 
+ font_setting = font_size()
+ 
++__resource_path__ = os.environ['RESOURCE_PATH']
+ 
+ try:
+     _fromUtf8 = QtCore.QString.fromUtf8
+@@ -15,7 +16,7 @@ class Ui_ray_fusion(object):
+         ray_fusion.setObjectName(_fromUtf8("ray_fusion"))
+         ray_fusion.resize(821, 572)
+         icon = QtGui.QIcon()
+-        icon.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/fusion.png" % (os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/fusion.png" % (__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         ray_fusion.setWindowIcon(icon)
+         self.verticalLayout_9 = QtWidgets.QVBoxLayout(ray_fusion)
+         self.verticalLayout_9.setObjectName(_fromUtf8("verticalLayout_9"))
+@@ -30,7 +31,7 @@ class Ui_ray_fusion(object):
+         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+         self.label = QtWidgets.QLabel(ray_fusion)
+         self.label.setText(_fromUtf8(""))
+-        self.label.setPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Page-World.ico" % (os.getcwd()))))
++        self.label.setPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Page-World.ico" % (__resource_path__))))
+         self.label.setObjectName(_fromUtf8("label"))
+         self.horizontalLayout.addWidget(self.label)
+         self.target_edit = QtWidgets.QLineEdit(ray_fusion)
+@@ -47,7 +48,7 @@ class Ui_ray_fusion(object):
+         self.help_button = QtWidgets.QPushButton(ray_fusion)
+         self.help_button.setText(_fromUtf8(""))
+         icon1 = QtGui.QIcon()
+-        icon1.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Help.ico" % (os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon1.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Help.ico" % (__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         self.help_button.setIcon(icon1)
+         self.help_button.setIconSize(QtCore.QSize(30, 30))
+         self.help_button.setFlat(True)
+@@ -72,7 +73,7 @@ class Ui_ray_fusion(object):
+         font.setPointSize(font_setting)
+         self.http_https_radio.setFont(font)
+         icon2 = QtGui.QIcon()
+-        icon2.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Page-World.ico" % (os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon2.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Page-World.ico" % (__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         self.http_https_radio.setIcon(icon2)
+         self.http_https_radio.setIconSize(QtCore.QSize(20, 20))
+         self.http_https_radio.setChecked(True)
+@@ -85,7 +86,7 @@ class Ui_ray_fusion(object):
+         font.setPointSize(font_setting)
+         self.telnet_radio.setFont(font)
+         icon3 = QtGui.QIcon()
+-        icon3.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Application-Osx-Terminal.ico" % (os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon3.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Application-Osx-Terminal.ico" % (__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         self.telnet_radio.setIcon(icon3)
+         self.telnet_radio.setObjectName(_fromUtf8("telnet_radio"))
+         self.horizontalLayout_2.addWidget(self.telnet_radio)
+@@ -96,7 +97,7 @@ class Ui_ray_fusion(object):
+         font.setPointSize(font_setting)
+         self.ftp_radio.setFont(font)
+         icon4 = QtGui.QIcon()
+-        icon4.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Ftp.ico" % (os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon4.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Ftp.ico" % (__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         self.ftp_radio.setIcon(icon4)
+         self.ftp_radio.setIconSize(QtCore.QSize(20, 20))
+         self.ftp_radio.setObjectName(_fromUtf8("ftp_radio"))
+@@ -111,7 +112,7 @@ class Ui_ray_fusion(object):
+         font.setPointSize(font_setting)
+         self.settings_button.setFont(font)
+         icon5 = QtGui.QIcon()
+-        icon5.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Setting-Tools.ico" % (os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon5.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Setting-Tools.ico" % (__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         self.settings_button.setIcon(icon5)
+         self.settings_button.setObjectName(_fromUtf8("settings_button"))
+         self.horizontalLayout_11.addWidget(self.settings_button)
+@@ -190,12 +191,12 @@ class Ui_ray_fusion(object):
+         self.horizontalLayout_12.addItem(spacerItem11)
+         self.user_wordlist_led = QtWidgets.QLabel(self.custom_wordlist_groupbox)
+         self.user_wordlist_led.setText(_fromUtf8(""))
+-        self.user_wordlist_led.setPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/red_led.png" % (os.getcwd()))))
++        self.user_wordlist_led.setPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/red_led.png" % (__resource_path__))))
+         self.user_wordlist_led.setObjectName(_fromUtf8("user_wordlist_led"))
+         self.horizontalLayout_12.addWidget(self.user_wordlist_led)
+         self.userlist_button = QtWidgets.QPushButton(self.custom_wordlist_groupbox)
+         icon6 = QtGui.QIcon()
+-        icon6.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Page-White-Database.ico" % (os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon6.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Page-White-Database.ico" % (__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         self.userlist_button.setIcon(icon6)
+         self.userlist_button.setIconSize(QtCore.QSize(20, 20))
+         self.userlist_button.setObjectName(_fromUtf8("userlist_button"))
+@@ -204,7 +205,7 @@ class Ui_ray_fusion(object):
+         self.horizontalLayout_12.addItem(spacerItem12)
+         self.password_wordlist_led = QtWidgets.QLabel(self.custom_wordlist_groupbox)
+         self.password_wordlist_led.setText(_fromUtf8(""))
+-        self.password_wordlist_led.setPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/red_led.png" % (os.getcwd()))))
++        self.password_wordlist_led.setPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/red_led.png" % (__resource_path__))))
+         self.password_wordlist_led.setObjectName(_fromUtf8("password_wordlist_led"))
+         self.horizontalLayout_12.addWidget(self.password_wordlist_led)
+         self.passwordlist_button = QtWidgets.QPushButton(self.custom_wordlist_groupbox)
+@@ -260,7 +261,7 @@ class Ui_ray_fusion(object):
+         self.label_3 = QtWidgets.QLabel(ray_fusion)
+         self.label_3.setMaximumSize(QtCore.QSize(52, 32))
+         self.label_3.setText(_fromUtf8(""))
+-        self.label_3.setPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Statistics.ico" % (os.getcwd()))))
++        self.label_3.setPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Statistics.ico" % (__resource_path__))))
+         self.label_3.setObjectName(_fromUtf8("label_3"))
+         self.horizontalLayout_6.addWidget(self.label_3)
+         self.label_4 = QtWidgets.QLabel(ray_fusion)
+@@ -309,7 +310,7 @@ class Ui_ray_fusion(object):
+         font.setPointSize(font_setting)
+         self.save_credentials.setFont(font)
+         icon7 = QtGui.QIcon()
+-        icon7.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Page-Save.ico" % (os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon7.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Page-Save.ico" % (__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         self.save_credentials.setIcon(icon7)
+         self.save_credentials.setIconSize(QtCore.QSize(20, 20))
+         self.save_credentials.setObjectName(_fromUtf8("save_credentials"))
+@@ -321,7 +322,7 @@ class Ui_ray_fusion(object):
+         font.setPointSize(font_setting)
+         self.clear_credentials.setFont(font)
+         icon8 = QtGui.QIcon()
+-        icon8.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Shape-Square-Delete.ico" % (os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon8.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/Shape-Square-Delete.ico" % (__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         self.clear_credentials.setIcon(icon8)
+         self.clear_credentials.setIconSize(QtCore.QSize(20, 20))
+         self.clear_credentials.setObjectName(_fromUtf8("clear_credentials"))
+diff --git a/Fern-Wifi-Cracker/gui/settings.py b/Fern-Wifi-Cracker/gui/settings.py
+index cc86aad..a078e22 100644
+--- a/Fern-Wifi-Cracker/gui/settings.py
++++ b/Fern-Wifi-Cracker/gui/settings.py
+@@ -13,12 +13,14 @@ from PyQt5 import QtCore, QtWidgets, QtGui
+ 
+ font_setting = font_size()
+ 
++__resource_path__ = os.environ['RESOURCE_PATH']
++
+ class settings(object):
+     def setupUi(self, Dialog):
+         Dialog.setObjectName("Dialog")
+         Dialog.resize(427, 133)
+         icon = QtGui.QIcon()
+-        icon.addPixmap(QtGui.QPixmap("%s/resources/wifi_5.png"%(os.getcwd())), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon.addPixmap(QtGui.QPixmap("%s/resources/wifi_5.png"%(__resource_path__)), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         Dialog.setWindowIcon(icon)
+         self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
+         self.buttonBox.setGeometry(QtCore.QRect(-20, 90, 341, 32))
+@@ -43,7 +45,7 @@ class settings(object):
+         self.label_2 = QtWidgets.QLabel(Dialog)
+         self.label_2.setGeometry(QtCore.QRect(10, -10, 91, 111))
+         self.label_2.setText("")
+-        self.label_2.setPixmap(QtGui.QPixmap("%s/resources/radio-wireless-signal-icone-5919-96.png"%(os.getcwd())))
++        self.label_2.setPixmap(QtGui.QPixmap("%s/resources/radio-wireless-signal-icone-5919-96.png"%(__resource_path__)))
+         self.label_2.setObjectName("label_2")
+         font = QtGui.QFont()
+         font.setPointSize(font_setting)
+diff --git a/Fern-Wifi-Cracker/gui/tips.py b/Fern-Wifi-Cracker/gui/tips.py
+index f88e15d..bfddbe6 100644
+--- a/Fern-Wifi-Cracker/gui/tips.py
++++ b/Fern-Wifi-Cracker/gui/tips.py
+@@ -5,6 +5,8 @@ from PyQt5 import QtCore, QtWidgets, QtGui
+ 
+ font_setting = font_size()
+ 
++__resource_path__ = os.environ['RESOURCE_PATH']
++
+ try:
+     _fromUtf8 = QtCore.QString.fromUtf8
+ except AttributeError:
+@@ -15,7 +17,7 @@ class tips_dialog(object):
+         tips_dialog.setObjectName(_fromUtf8("tips_dialog"))
+         tips_dialog.resize(405, 152)
+         icon = QtGui.QIcon()
+-        icon.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/1286998882_ktip.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/1286998882_ktip.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         tips_dialog.setWindowIcon(icon)
+         self.verticalLayout_4 = QtWidgets.QVBoxLayout(tips_dialog)
+         self.verticalLayout_4.setObjectName(_fromUtf8("verticalLayout_4"))
+@@ -25,7 +27,7 @@ class tips_dialog(object):
+         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+         self.label = QtWidgets.QLabel(tips_dialog)
+         self.label.setText(_fromUtf8(""))
+-        self.label.setPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/1286998882_ktip.png"%(os.getcwd()))))
++        self.label.setPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/1286998882_ktip.png"%(__resource_path__))))
+         self.label.setObjectName(_fromUtf8("label"))
+         self.horizontalLayout.addWidget(self.label)
+         self.verticalLayout = QtWidgets.QVBoxLayout()
+diff --git a/Fern-Wifi-Cracker/gui/toolbox.py b/Fern-Wifi-Cracker/gui/toolbox.py
+index 23c4517..c0afba8 100644
+--- a/Fern-Wifi-Cracker/gui/toolbox.py
++++ b/Fern-Wifi-Cracker/gui/toolbox.py
+@@ -4,6 +4,7 @@ from PyQt5 import QtCore, QtWidgets, QtGui
+ 
+ font_setting = font_size()
+ 
++__resource_path__ = os.environ['RESOURCE_PATH']
+ 
+ try:
+     _fromUtf8 = QtCore.QString.fromUtf8
+@@ -15,7 +16,7 @@ class toolbox_win(object):
+         toolbox_win.setObjectName(_fromUtf8("toolbox_win"))
+         toolbox_win.resize(736, 304)
+         icon = QtGui.QIcon()
+-        icon.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/1295905972_tool_kit.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/1295905972_tool_kit.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         toolbox_win.setWindowIcon(icon)
+         self.verticalLayout_5 = QtWidgets.QVBoxLayout(toolbox_win)
+         self.verticalLayout_5.setObjectName(_fromUtf8("verticalLayout_5"))
+@@ -48,7 +49,7 @@ class toolbox_win(object):
+         font.setPointSize(font_setting)
+         self.geotrack_button.setFont(font)
+         icon1 = QtGui.QIcon()
+-        icon1.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/map.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon1.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/map.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         self.geotrack_button.setIcon(icon1)
+         self.geotrack_button.setIconSize(QtCore.QSize(49, 49))
+         self.geotrack_button.setObjectName(_fromUtf8("geotrack_button"))
+@@ -75,7 +76,7 @@ class toolbox_win(object):
+         font.setPointSize(font_setting)
+         self.cookie_hijack_button.setFont(font)
+         icon2 = QtGui.QIcon()
+-        icon2.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/cookies-icon.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon2.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/cookies-icon.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         self.cookie_hijack_button.setIcon(icon2)
+         self.cookie_hijack_button.setIconSize(QtCore.QSize(60, 60))
+         self.cookie_hijack_button.setObjectName(_fromUtf8("cookie_hijack_button"))
+@@ -102,7 +103,7 @@ class toolbox_win(object):
+         font.setPointSize(font_setting)
+         self.ray_fusion_button.setFont(font)
+         icon3 = QtGui.QIcon()
+-        icon3.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/fusion.png" % (os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon3.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/fusion.png" % (__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         self.ray_fusion_button.setIcon(icon3)
+         self.ray_fusion_button.setIconSize(QtCore.QSize(60, 60))
+         self.ray_fusion_button.setObjectName(_fromUtf8("ray_fusion_button"))
+@@ -144,7 +145,7 @@ class toolbox_win(object):
+         font.setPointSize(font_setting)
+         self.pushButton.setFont(font)
+         icon4 = QtGui.QIcon()
+-        icon4.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/1295906241_preferences-desktop-font.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon4.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/1295906241_preferences-desktop-font.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         self.pushButton.setIcon(icon4)
+         self.pushButton.setIconSize(QtCore.QSize(48, 49))
+         self.pushButton.setObjectName(_fromUtf8("pushButton"))
+@@ -171,7 +172,7 @@ class toolbox_win(object):
+         font.setPointSize(font_setting)
+         self.attack_options_button.setFont(font)
+         icon5 = QtGui.QIcon()
+-        icon5.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/wifi_4.png"%(os.getcwd()))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
++        icon5.addPixmap(QtGui.QPixmap(_fromUtf8("%s/resources/wifi_4.png"%(__resource_path__))), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+         self.attack_options_button.setIcon(icon5)
+         self.attack_options_button.setIconSize(QtCore.QSize(48, 49))
+         self.attack_options_button.setObjectName(_fromUtf8("attack_options_button"))

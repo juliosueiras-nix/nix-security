@@ -24,7 +24,8 @@
               pkgs.nixfmt
               pkgs.arion
               pkgs.gdb
-              self.packages.x86_64-linux."802_11".asleap
+              pkgs.ripgrep
+              self.packages.x86_64-linux."802_11".fern-wifi-cracker
             ];
           };
       });
