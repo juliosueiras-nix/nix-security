@@ -24,5 +24,9 @@ in stdenv.mkDerivation rec {
     "${src}/debian/patches/snakeoil-certs.diff"
     "${src}/debian/patches/freeradius-wpe.patch"
   ];
+
+  postInstall = ''
+    mv $out/bin/radiusd $out/bin/freeradius-wpe
+  '';
 }
 
