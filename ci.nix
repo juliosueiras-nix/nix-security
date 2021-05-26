@@ -1,3 +1,5 @@
-{
-  inherit (import (./.) {}).defaultNix.packages.x86_64-linux;
+let
+  packages = (import (./.) {}).defaultNix.packages.x86_64-linux;
+in {
+  inherit packages;
 }
