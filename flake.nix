@@ -2,7 +2,7 @@
   description = "Nix Security Tools Collection";
 
   inputs.nixpkgs.url =
-    "github:nixos/nixpkgs/563c5037c94cfb5d6e89aff7221ddbffb069eac0";
+    "github:nixos/nixpkgs/master";
 
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
@@ -25,7 +25,7 @@
               pkgs.arion
               pkgs.gdb
               pkgs.ripgrep
-              self.packages.x86_64-linux."802_11".fern-wifi-cracker
+              self.packages.x86_64-linux."802_11".hostapd-wpe
             ];
           };
       });
