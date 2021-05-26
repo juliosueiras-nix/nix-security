@@ -28,7 +28,7 @@ in stdenv.mkDerivation rec {
   # from https://gitlab.com/kalilinux/packages/freeradius-wpe/-/blob/kali/master/debian/rules
   postInstall = ''
     mv $out/etc/raddb $out/etc/freeradius-wpe
-    mv $out/bin/radiusd $out/bin/freeradius-wpe
+    mv $out/sbin/radiusd $out/sbin/freeradius-wpe
     find $out/lib -name "*.la" -delete
     find $out/lib -name "*.a" -and \! -name "libfreeradius-*.a" -delete
     rm $out/etc/freeradius-wpe/mods-enabled/*
