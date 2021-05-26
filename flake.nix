@@ -25,7 +25,7 @@
               pkgs.arion
               pkgs.gdb
               pkgs.ripgrep
-              self.packages.x86_64-linux."802_11".hostapd-wpe
+              self.packages.x86_64-linux.wifi-80211.freeradius-wpe
             ];
           };
       });
