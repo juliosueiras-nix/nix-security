@@ -1,5 +1,3 @@
 let
-  packages = (import (./.) {}).defaultNix.packages.x86_64-linux;
-in {
-  inherit packages;
-}
+  packages = (import (./.) {}).defaultNix.packages.${builtins.currentSystem};
+in packages.wifi-8012
