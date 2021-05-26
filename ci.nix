@@ -1,3 +1,3 @@
 let
   packages = (import (./.) {}).defaultNix.packages.${builtins.currentSystem};
-in packages.wifi-80122
+in packages.wifi-80211
