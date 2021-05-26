@@ -1,1 +1,3 @@
-(import (./.) {}).defaultNix.packages.x86_64-linux
+{
+  main = (import (./.) {}).defaultNix.packages.x86_64-linux;
+}
