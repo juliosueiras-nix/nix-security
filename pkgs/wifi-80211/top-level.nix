@@ -8,4 +8,5 @@
   freeradius-wpe = callPackage ./freeradius-wpe {};
   hostapd-wpe = callPackage ./hostapd-wpe {};
   mdk3 = callPackage ./mdk3 {};
+  wifi-honey = callPackage ./wifi-honey {};
 }

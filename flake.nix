@@ -25,7 +25,7 @@
               pkgs.arion
               pkgs.gdb
               pkgs.ripgrep
-              self.packages.x86_64-linux.wifi-80211.mdk3
+              self.packages.x86_64-linux.wifi-80211.wifi-honey
             ];
           };
       });
