@@ -1,7 +1,7 @@
 { pkgs }:
 
 {
-  inherit (pkgs) cifs-utils ftp iw lvm2 mlocate netcat-traditional nfs-common openssh-server openvpn p7zip-full parted rfkill samba snmp sudo tcpdump testdisk tftp tightvncserver tmux unrar vim whois;
+  inherit (pkgs) cifs-utils netkit-tftp iw lvm2 mlocate libressl nfs-utils openssh openvpn p7zip parted utillinux samba net-snmp sudo tcpdump testdisk tightvnc tmux unrar vim whois;
 }
 
 
