@@ -1,3 +1,5 @@
 let
   packages = (import (./.) {}).defaultNix.packages.${builtins.currentSystem};
-in packages.wifi-80211
+in {
+  inherit (packages) wifi-80211 base;
+}
