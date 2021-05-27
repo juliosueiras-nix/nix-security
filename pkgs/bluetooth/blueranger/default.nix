@@ -19,9 +19,8 @@ in stdenv.mkDerivation {
   buildInputs = [ makeWrapper ];
 
   installPhase = ''
-    mkdir -p $out/bin
-    cp blueranger.sh $out/
-    substituteInPlace $out/blueranger.sh --replace /bin/true true
-    makeWrapper $out/blueranger.sh $out/bin/blueranger --set PATH "$PATH:${lib.makeBinPath [ oldBluez ncurses ]}"
+    install -Dm755 blueranger.sh $out/bin/blueranger.sh
+    substituteInPlace $out/bin/blueranger.sh --replace /bin/true true
+    wrapProgram $out/bin/blueranger.sh --set PATH "$PATH:${lib.makeBinPath [ oldBluez ncurses ]}"
   '';
 }
