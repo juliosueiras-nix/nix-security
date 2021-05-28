@@ -5,4 +5,5 @@ let
 in {
   bluelog = callPackage ./bluelog { };
   blueranger = callPackage ./blueranger {  inherit oldBluez; };
+  bluesnarfer = callPackage ./bluesnarfer { };
 }
