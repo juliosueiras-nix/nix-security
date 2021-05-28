@@ -14,7 +14,7 @@ stdenv.mkDerivation {
 
   installPhase = ''
     mkdir -p $out/bin
-    sed 's;screen_wifi_honey.rc;$TMPDIR/screen_wifi_honey.rc;' wifi_honey.sh | sed "s;wifi_honey_template.rc;$out/wifi_honey_template.rc;" > $out/wifi_honey.sh
+    sed 's;screen_wifi_honey.rc;/tmp/screen_wifi_honey.rc;' wifi_honey.sh | sed "s;wifi_honey_template.rc;$out/wifi_honey_template.rc;" > $out/wifi_honey.sh
     chmod +x $out/wifi_honey.sh
     makeWrapper $out/wifi_honey.sh $out/bin/wifi-honey --set PATH "$PATH:${lib.makeBinPath [ aircrack-ng wirelesstools screen iproute procps kmod utillinux]}"
     cp wifi_honey_template.rc $out/
