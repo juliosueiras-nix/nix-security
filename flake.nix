@@ -25,7 +25,7 @@
               pkgs.arion
               pkgs.gdb
               pkgs.ripgrep
-              self.packages.x86_64-linux.bluetooth.spooftooph
+              self.packages.x86_64-linux.bluetooth.btscanner
             ];
           };
       });

@@ -1,4 +1,4 @@
-{ stdenv, lib, ncurses, bluez, libxml2, perl }:
+{ stdenv, lib, ncurses, bluez, libxml2, perl, fetchzip }:
 
 stdenv.mkDerivation {
   name = "btscanner";
@@ -11,9 +11,9 @@ stdenv.mkDerivation {
     perl
   ];
 
-  src = fetchTarball {
+  src = fetchzip {
     url = "https://dl.packetstormsecurity.net/wireless/btscanner-2.0.tar.bz2";
-    sha256 = "18mpbxmxnyskw436r2l0nbf0rvrrwhswrp80c86pla258b8yf3dx";
+    sha256 = "vQ3n0UJFKHoNYgDdzDXkOe8M3LKAimwG4VN722tft6I=";
   };
 
   preBuild = ''
