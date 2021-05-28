@@ -20,7 +20,6 @@ stdenv.mkDerivation {
     substituteInPlace Makefile --replace 'Wimplicit-function-dec' 'Wimplicit-function-declaration'
     substituteInPlace btscanner.xml --replace 'file:///usr/local/etc/btscanner.dtd' "file://$out/btscanner.dtd"
     substituteInPlace btscanner.xml --replace '/usr/local/share' "$out"
-    
   '';
 
   postInstall = ''

@@ -1,4 +1,4 @@
-{ stdenv, makeWrapper, lib, fetchFromGitLab, bluez }:
+{ stdenv, lib, fetchFromGitLab, bluez }:
 
 let
   src = fetchFromGitLab {
@@ -16,7 +16,7 @@ in stdenv.mkDerivation {
     "${src}/debian/patches/Fix-format-security-error.patch"
   ];
 
-  buildInputs = [ makeWrapper bluez ];
+  buildInputs = [ bluez ];
 
   installPhase = ''
     install -Dm755 fang $out/bin/fang
