@@ -8,4 +8,5 @@ in {
   blueranger = callPackage ./blueranger {  inherit oldBluez; };
   bluesnarfer = callPackage ./bluesnarfer { };
   bluez-hcidump = oldBluez;
+  btscanner = callPackage ./btscanner { };
 }
