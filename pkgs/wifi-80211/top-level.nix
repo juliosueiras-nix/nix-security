@@ -1,7 +1,7 @@
 { callPackage, pkgs, ... }:
 
 {
-  inherit (pkgs) aircrack-ng bully cowpatty mdk4;
+  inherit (pkgs) aircrack-ng bully cowpatty mdk4 hashcat iw kismet macchanger reaver wifite;
   asleap = callPackage ./asleap {}; 
   eapmd5pass = callPackage ./eapmd5pass {};
   fern-wifi-cracker = callPackage ./fern-wifi-cracker {};
