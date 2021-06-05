@@ -8,7 +8,8 @@ let
     rev = "317117c15dd1483b02776af8560df426a15d1516";
     sha256 = "QRY6kz6TSqQOQKrIvW/lHCtF2aLFJUdvbkYYWdA/3F8=";
   };
-in stdenv.mkDerivation rec {
+in
+stdenv.mkDerivation rec {
   pname = "freeradius-wpe"; inherit src version;
 
   buildInputs = [ net-snmp talloc openssl ];

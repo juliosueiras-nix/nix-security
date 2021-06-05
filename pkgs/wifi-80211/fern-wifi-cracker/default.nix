@@ -2,7 +2,8 @@
 
 let
   version = "3.3";
-in stdenv.mkDerivation rec {
+in
+stdenv.mkDerivation rec {
   pname = "fern-wifi-cracker"; inherit version;
 
   buildInputs = [ qt5.wrapQtAppsHook python3Packages.wrapPython makeWrapper ];

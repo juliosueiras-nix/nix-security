@@ -1,6 +1,6 @@
 { stdenv, lib, fetchurl, hostapd }:
 
-hostapd.overrideAttrs (old:{
+hostapd.overrideAttrs (old: {
   name = "hostapd-wpe";
 
   patches = old.patches ++ [

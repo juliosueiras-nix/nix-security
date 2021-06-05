@@ -7,7 +7,8 @@ let
     rev = "652d8999c9ef8e37e89c2ee7169179cadee73d67";
     sha256 = "cDUhLHJTE7w5H1zBctndx8ClD0PC/kaEX+62YB6Gwkg=";
   };
-in stdenv.mkDerivation {
+in
+stdenv.mkDerivation {
   name = "redfang";
 
   inherit src;

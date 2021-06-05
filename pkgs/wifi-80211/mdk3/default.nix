@@ -1,6 +1,6 @@
 { stdenv, lib, fetchurl, mdk4, fetchFromGitHub }:
 
-mdk4.overrideAttrs (old:{
+mdk4.overrideAttrs (old: {
   name = "mkd3";
 
   src = fetchFromGitHub {

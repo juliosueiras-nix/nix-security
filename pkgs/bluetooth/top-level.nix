@@ -1,11 +1,12 @@
 { callPackage, pkgs, ... }:
 
 let
-  oldBluez = callPackage ./oldBluez {};
-in {
+  oldBluez = callPackage ./oldBluez { };
+in
+{
   inherit (pkgs) bluez crackle ubertooth;
   bluelog = callPackage ./bluelog { };
-  blueranger = callPackage ./blueranger {  inherit oldBluez; };
+  blueranger = callPackage ./blueranger { inherit oldBluez; };
   bluesnarfer = callPackage ./bluesnarfer { };
   bluez-hcidump = oldBluez;
   btscanner = callPackage ./btscanner { };

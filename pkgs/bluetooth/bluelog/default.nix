@@ -5,7 +5,8 @@ let
     url = "http://linuxnet.ca/ieee/oui.txt.gz";
     sha256 = "byhkzvzAhuBa8agUo9DKjkRH8ParcxNF+5l73pKtmi0=";
   };
-in stdenv.mkDerivation {
+in
+stdenv.mkDerivation {
   name = "bluelog";
   version = "2017-07-19";
 

@@ -16,7 +16,8 @@ let
       sha256 = "Qgeu45xEVMGVWyaj138z5zDq6UwgQGl2tt6Aw6PPsc0=";
     };
   };
-in stdenv.mkDerivation {
+in
+stdenv.mkDerivation {
   name = "asleap";
   version = "2020-11-28";
 

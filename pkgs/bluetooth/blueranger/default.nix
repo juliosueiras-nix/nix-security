@@ -7,7 +7,8 @@ let
     rev = "866558f73a71eee7a22db5740a72523ba8db3b71";
     sha256 = "lcsiJUg5t+VlhIU9gCJ/Hh2zxb7sLQx3MCZwg44Rk0o=";
   };
-in stdenv.mkDerivation {
+in
+stdenv.mkDerivation {
   name = "blueranger";
 
   inherit src;

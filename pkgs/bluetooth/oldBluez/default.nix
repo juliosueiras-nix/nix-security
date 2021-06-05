@@ -1,13 +1,25 @@
 # from https://github.com/NixOS/nixpkgs/pull/26665/files
-{ stdenv, fetchurl, pkgconfig, dbus, glib, alsaLib,
-  pythonPackages, readline, libsndfile, udev, libical,
-  systemd, enableWiimote ? false }:
+{ stdenv
+, fetchurl
+, pkgconfig
+, dbus
+, glib
+, alsaLib
+, pythonPackages
+, readline
+, libsndfile
+, udev
+, libical
+, systemd
+, enableWiimote ? false
+}:
 
 assert stdenv.isLinux;
 
 let
   inherit (pythonPackages) python;
-in stdenv.mkDerivation rec {
+in
+stdenv.mkDerivation rec {
   name = "bluez-5.28";
 
   src = fetchurl {
@@ -19,19 +31,28 @@ in stdenv.mkDerivation rec {
     [ dbus pygobject2 pygobject3 recursivePthLoader ];
 
   buildInputs =
-    [ pkgconfig dbus glib alsaLib python pythonPackages.wrapPython
-      readline libsndfile udev libical
+    [
+      pkgconfig
+      dbus
+      glib
+      alsaLib
+      python
+      pythonPackages.wrapPython
+      readline
+      libsndfile
+      udev
+      libical
       # Disables GStreamer; not clear what it gains us other than a
       # zillion extra dependencies.
       # gstreamer gst-plugins-base 
     ];
 
   preConfigure = ''
-      substituteInPlace tools/hid2hci.rules --replace /sbin/udevadm ${systemd}/bin/udevadm
-      substituteInPlace tools/hid2hci.rules --replace "hid2hci " "$out/lib/udev/hid2hci "
-      sed -i '1s;^;#include <linux/sockios.h>\n;' tools/rctest.c
-      sed -i '1s;^;#include <linux/sockios.h>\n;' tools/l2test.c
-    '';
+    substituteInPlace tools/hid2hci.rules --replace /sbin/udevadm ${systemd}/bin/udevadm
+    substituteInPlace tools/hid2hci.rules --replace "hid2hci " "$out/lib/udev/hid2hci "
+    sed -i '1s;^;#include <linux/sockios.h>\n;' tools/rctest.c
+    sed -i '1s;^;#include <linux/sockios.h>\n;' tools/l2test.c
+  '';
 
   configureFlags = [
     "--localstatedir=/var"
@@ -43,8 +64,8 @@ in stdenv.mkDerivation rec {
     "--with-systemdsystemunitdir=$(out)/etc/systemd/system"
     "--with-systemduserunitdir=$(out)/etc/systemd/user"
     "--with-udevdir=$(out)/lib/udev"
-    ] ++
-    stdenv.lib.optional enableWiimote [ "--enable-wiimote" ];
+  ] ++
+  stdenv.lib.optional enableWiimote [ "--enable-wiimote" ];
 
   # Work around `make install' trying to create /var/lib/bluetooth.
   installFlags = "statedir=$(TMPDIR)/var/lib/bluetooth";

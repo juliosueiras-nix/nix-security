@@ -25,7 +25,7 @@
               pkgs.arion
               pkgs.gdb
               pkgs.ripgrep
-              self.packages.x86_64-linux.crypto-stego.stegsnow
+              self.packages.x86_64-linux.database.tnscmd10g
             ];
           };
       });
