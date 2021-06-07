@@ -9,8 +9,10 @@ Currently finished sections:
 - database
 - wifi-80211
 
-Unfinished sections:
+Inprogress Sections:
 - exploitation
+
+Unfinished sections:
 - forensics
 - fuzzing
 - gpu

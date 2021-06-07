@@ -25,7 +25,7 @@
               pkgs.arion
               pkgs.gdb
               pkgs.ripgrep
-              self.packages.x86_64-linux.database.tnscmd10g
+              self.packages.x86_64-linux.exploitation.set
             ];
           };
       });
