@@ -11,9 +11,9 @@ Currently finished sections:
 - exploitation
 
 Inprogress Sections:
+- forensics
 
 Unfinished sections:
-- forensics
 - fuzzing
 - gpu
 - hardware

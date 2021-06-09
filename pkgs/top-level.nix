@@ -7,4 +7,5 @@
   crypto-stego = callPackage ./crypto-stego/top-level.nix { };
   database = callPackage ./database/top-level.nix { };
   exploitation = callPackage ./exploitation/top-level.nix { };
+  forensics = callPackage ./forensics/top-level.nix { };
 }
