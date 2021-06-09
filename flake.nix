@@ -25,7 +25,7 @@
               pkgs.arion
               pkgs.gdb
               pkgs.ripgrep
-              self.packages.x86_64-linux.exploitation.termineter
+              self.packages.x86_64-linux.exploitation.set
             ];
           };
       });
