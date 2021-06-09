@@ -8,9 +8,9 @@ Currently finished sections:
 - crypto-stego
 - database
 - wifi-80211
+- exploitation
 
 Inprogress Sections:
-- exploitation
 
 Unfinished sections:
 - forensics
