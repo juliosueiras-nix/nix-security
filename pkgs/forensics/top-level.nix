@@ -1,5 +1,6 @@
 { callPackage, pkgs, ... }:
 
 {
-  inherit (pkgs) afflib;
+  inherit (pkgs) afflib apktool;
+  autopsy = callPackage ./autopsy {};
 }
