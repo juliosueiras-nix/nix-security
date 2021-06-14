@@ -1,0 +1,70 @@
+*** a/buildSrc/linux.gradle	2021-06-13 22:13:59.560653557 -0400
+--- b/buildSrc/linux.gradle	2021-06-13 22:23:26.495390625 -0400
+*************** if (!IS_64) {
+*** 53,59 ****
+  // Specify the compilation parameters and link parameters
+  def ccFlags = [
+          commonFlags, "-I$JDK_HOME/include", "-I$JDK_HOME/include/linux", "-c",
+!         "-ffunction-sections", "-fdata-sections", "-Wcast-function-type",
+          IS_DEBUG_NATIVE ? ["-ggdb", "-DVERBOSE"] : ["-O2", "-DNDEBUG"]].flatten()
+  def ccFlagsGTK3 = ccFlags
+  //ccFlags.addAll(["-Wnon-virtual-dtor", "-Woverloaded-virtual", "-std=c++0x"])
+--- 53,59 ----
+  // Specify the compilation parameters and link parameters
+  def ccFlags = [
+          commonFlags, "-I$JDK_HOME/include", "-I$JDK_HOME/include/linux", "-c",
+!         "-ffunction-sections", "-fdata-sections",
+          IS_DEBUG_NATIVE ? ["-ggdb", "-DVERBOSE"] : ["-O2", "-DNDEBUG"]].flatten()
+  def ccFlagsGTK3 = ccFlags
+  //ccFlags.addAll(["-Wnon-virtual-dtor", "-Woverloaded-virtual", "-std=c++0x"])
+*************** LINUX.glass.javahInclude = [
+*** 199,205 ****
+      "com/sun/glass/ui/gtk/*"]
+  LINUX.glass.glass.nativeSource = ft_gtk_launcher.getFiles()
+  LINUX.glass.glass.compiler = compiler
+! LINUX.glass.glass.ccFlags = [ccFlags, gtk2CCFlags,  "-Werror"].flatten()
+  LINUX.glass.glass.linker = linker
+  LINUX.glass.glass.linkFlags = [linkFlags, "-lX11", "-ldl" ].flatten()
+  LINUX.glass.glass.lib = "glass"
+--- 199,205 ----
+      "com/sun/glass/ui/gtk/*"]
+  LINUX.glass.glass.nativeSource = ft_gtk_launcher.getFiles()
+  LINUX.glass.glass.compiler = compiler
+! LINUX.glass.glass.ccFlags = [ccFlags, gtk2CCFlags].flatten()
+  LINUX.glass.glass.linker = linker
+  LINUX.glass.glass.linkFlags = [linkFlags, "-lX11", "-ldl" ].flatten()
+  LINUX.glass.glass.lib = "glass"
+*************** LINUX.glass.glass.lib = "glass"
+*** 207,213 ****
+  LINUX.glass.glassgtk2 = [:]
+  LINUX.glass.glassgtk2.nativeSource =  ft_gtk.getFiles()
+  LINUX.glass.glassgtk2.compiler = compiler
+! LINUX.glass.glassgtk2.ccFlags = [ccFlags, gtk2CCFlags, "-Werror"].flatten()
+  LINUX.glass.glassgtk2.linker = linker
+  LINUX.glass.glassgtk2.linkFlags = [linkFlags, gtk2LinkFlags ].flatten()
+  LINUX.glass.glassgtk2.lib = "glassgtk2"
+--- 207,213 ----
+  LINUX.glass.glassgtk2 = [:]
+  LINUX.glass.glassgtk2.nativeSource =  ft_gtk.getFiles()
+  LINUX.glass.glassgtk2.compiler = compiler
+! LINUX.glass.glassgtk2.ccFlags = [ccFlags, gtk2CCFlags].flatten()
+  LINUX.glass.glassgtk2.linker = linker
+  LINUX.glass.glassgtk2.linkFlags = [linkFlags, gtk2LinkFlags ].flatten()
+  LINUX.glass.glassgtk2.lib = "glassgtk2"
+*************** LINUX.glass.glassgtk2.lib = "glassgtk2"
+*** 215,221 ****
+  LINUX.glass.glassgtk3 = [:]
+  LINUX.glass.glassgtk3.nativeSource =  ft_gtk.getFiles()
+  LINUX.glass.glassgtk3.compiler = compiler
+! LINUX.glass.glassgtk3.ccFlags = [ccFlags, gtk3CCFlags, "-Werror"].flatten()
+  LINUX.glass.glassgtk3.linker = linker
+  LINUX.glass.glassgtk3.linkFlags = [linkFlags, gtk3LinkFlags ].flatten()
+  LINUX.glass.glassgtk3.lib = "glassgtk3"
+--- 215,221 ----
+  LINUX.glass.glassgtk3 = [:]
+  LINUX.glass.glassgtk3.nativeSource =  ft_gtk.getFiles()
+  LINUX.glass.glassgtk3.compiler = compiler
+! LINUX.glass.glassgtk3.ccFlags = [ccFlags, gtk3CCFlags].flatten()
+  LINUX.glass.glassgtk3.linker = linker
+  LINUX.glass.glassgtk3.linkFlags = [linkFlags, gtk3LinkFlags ].flatten()
+  LINUX.glass.glassgtk3.lib = "glassgtk3"
