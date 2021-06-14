@@ -1,57 +1,33 @@
-*** a/build.gradle	2018-12-10 11:30:22.000000000 -0500
---- b/build.gradle	2021-06-13 22:14:17.924418655 -0400
-*************** defineProperty("COMPILE_PARFAIT", "false
-*** 325,331 ****
-  ext.IS_COMPILE_PARFAIT = Boolean.parseBoolean(COMPILE_PARFAIT)
-  
-  // COMPILE_JFR specifies whether to build code that logs to JRockit Flight Recorder
-! defineProperty("COMPILE_JFR", Boolean.toString(file("$JDK_HOME/jre/lib/jfr.jar").exists()))
-  ext.IS_COMPILE_JFR = Boolean.parseBoolean(COMPILE_JFR)
-  
-  // RETAIN_PACKAGER_TESTS specifies whether the tests in fxpackager should
---- 325,331 ----
-  ext.IS_COMPILE_PARFAIT = Boolean.parseBoolean(COMPILE_PARFAIT)
-  
-  // COMPILE_JFR specifies whether to build code that logs to JRockit Flight Recorder
-! defineProperty("COMPILE_JFR", "false")
-  ext.IS_COMPILE_JFR = Boolean.parseBoolean(COMPILE_JFR)
-  
-  // RETAIN_PACKAGER_TESTS specifies whether the tests in fxpackager should
-*************** try {
-*** 742,748 ****
-      if (inStream.readLine() != null) {
-          String v = inStream.readLine();
-          if (v != null) {
-!             int ib = v.indexOf(" (build ");
-              if (ib != -1) {
-                  String ver = v.substring(ib + 8, v.size() - 1);
-  
---- 742,748 ----
-      if (inStream.readLine() != null) {
-          String v = inStream.readLine();
-          if (v != null) {
-!             int ib = v.indexOf(")(build ");
-              if (ib != -1) {
-                  String ver = v.substring(ib + 8, v.size() - 1);
-  
-*************** project(":graphics") {
-*** 1306,1314 ****
-          compile name: SWT_FILE_NAME
-          stubCompile group: "junit", name: "junit", version: "4.8.2",
-          project(":base").sourceSets.test.output, sourceSets.main.output
-!         antlr3 group: "org.antlr", name: "antlr", version: "3.1.3"
-!         antlr3 group: "org.antlr", name: "antlr-runtime",  version: "3.1.3"
-!         antlr3 group: "org.antlr", name: "stringtemplate", version: "3.2"
-      }
-  
-      // Create a single "native" task which will depend on all the individual native tasks for graphics
---- 1306,1314 ----
-          compile name: SWT_FILE_NAME
-          stubCompile group: "junit", name: "junit", version: "4.8.2",
-          project(":base").sourceSets.test.output, sourceSets.main.output
-!         antlr3 group: "org.antlr", name: "antlr", version: "3.5.2"
-!         antlr3 group: "org.antlr", name: "antlr-runtime",  version: "3.5.2"
-!         antlr3 group: "org.antlr", name: "stringtemplate", version: "3.2.1"
-      }
-  
-      // Create a single "native" task which will depend on all the individual native tasks for graphics
+--- a/build.gradle	2018-12-10 11:30:22.000000000 -0500
++++ b/build.gradle	2021-06-13 22:14:17.924418655 -0400
+@@ -325,7 +325,7 @@
+ ext.IS_COMPILE_PARFAIT = Boolean.parseBoolean(COMPILE_PARFAIT)
+ 
+ // COMPILE_JFR specifies whether to build code that logs to JRockit Flight Recorder
+-defineProperty("COMPILE_JFR", Boolean.toString(file("$JDK_HOME/jre/lib/jfr.jar").exists()))
++defineProperty("COMPILE_JFR", "false")
+ ext.IS_COMPILE_JFR = Boolean.parseBoolean(COMPILE_JFR)
+ 
+ // RETAIN_PACKAGER_TESTS specifies whether the tests in fxpackager should
+@@ -742,7 +742,7 @@
+     if (inStream.readLine() != null) {
+         String v = inStream.readLine();
+         if (v != null) {
+-            int ib = v.indexOf(" (build ");
++            int ib = v.indexOf(")(build ");
+             if (ib != -1) {
+                 String ver = v.substring(ib + 8, v.size() - 1);
+ 
+@@ -1306,9 +1306,9 @@
+         compile name: SWT_FILE_NAME
+         stubCompile group: "junit", name: "junit", version: "4.8.2",
+         project(":base").sourceSets.test.output, sourceSets.main.output
+-        antlr3 group: "org.antlr", name: "antlr", version: "3.1.3"
+-        antlr3 group: "org.antlr", name: "antlr-runtime",  version: "3.1.3"
+-        antlr3 group: "org.antlr", name: "stringtemplate", version: "3.2"
++        antlr3 group: "org.antlr", name: "antlr", version: "3.5.2"
++        antlr3 group: "org.antlr", name: "antlr-runtime",  version: "3.5.2"
++        antlr3 group: "org.antlr", name: "stringtemplate", version: "3.2.1"
+     }
+ 
+     // Create a single "native" task which will depend on all the individual native tasks for graphics
