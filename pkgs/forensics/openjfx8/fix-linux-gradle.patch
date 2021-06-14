@@ -1,14 +1,5 @@
---- a/buildSrc/linux.gradle	2021-06-13 22:13:59.560653557 -0400
+--- a/buildSrc/linux.gradle	2021-06-14 07:05:59.369725711 -0400
 +++ b/buildSrc/linux.gradle	2021-06-13 22:23:26.495390625 -0400
-@@ -53,7 +53,7 @@
- // Specify the compilation parameters and link parameters
- def ccFlags = [
-         commonFlags, "-I$JDK_HOME/include", "-I$JDK_HOME/include/linux", "-c",
--        "-ffunction-sections", "-fdata-sections", "-Wcast-function-type",
-+        "-ffunction-sections", "-fdata-sections",
-         IS_DEBUG_NATIVE ? ["-ggdb", "-DVERBOSE"] : ["-O2", "-DNDEBUG"]].flatten()
- def ccFlagsGTK3 = ccFlags
- //ccFlags.addAll(["-Wnon-virtual-dtor", "-Woverloaded-virtual", "-std=c++0x"])
 @@ -199,7 +199,7 @@
      "com/sun/glass/ui/gtk/*"]
  LINUX.glass.glass.nativeSource = ft_gtk_launcher.getFiles()

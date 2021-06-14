@@ -35,8 +35,6 @@ let
       ./fix-build-gradle.patch
     ];
 
-    patchFlags = [ "-p1" ];
-
     preConfigure = ''
       sed -i 's;#include <sys/sysctl.h>;;g' modules/fxpackager/src/main/native/library/common/PosixPlatform.cpp
       sed -i 's;#include <xlocale.h>;;g' modules/media/src/main/native/gstreamer/3rd_party/glib/glib-2.56.1/glib/gstrfuncs.c
