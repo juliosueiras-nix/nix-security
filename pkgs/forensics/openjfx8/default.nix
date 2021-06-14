@@ -30,10 +30,12 @@ let
     version = "${major}${update}-${build}";
 
     patches = [
-      ./fix-build-gradle.patch
-      ./fix-buildsrc-build-gradle.patch
       ./fix-linux-gradle.patch
+      ./fix-buildsrc-build-gradle.patch
+      ./fix-build-gradle.patch
     ];
+
+    patchFlags = [ "-p1" ];
 
     preConfigure = ''
       sed -i 's;#include <sys/sysctl.h>;;g' modules/fxpackager/src/main/native/library/common/PosixPlatform.cpp
