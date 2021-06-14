@@ -105,6 +105,10 @@ in makePackage {
     substituteInPlace build.gradle \
       --replace 'mavenCentral()' 'mavenLocal(); maven { url uri("${deps}") }' \
       --replace 'name: SWT_FILE_NAME' "files('$swtJar')"
+
+    substituteInPlace buildSrc/build.gradle \
+      --replace 'mavenCentral()' 'mavenLocal(); maven { url uri("${deps}") }' \
+      --replace 'name: SWT_FILE_NAME' "files('$swtJar')"
   '';
 
   installPhase = ''
