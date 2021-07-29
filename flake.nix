@@ -25,7 +25,7 @@
               pkgs.arion
               pkgs.gdb
               pkgs.ripgrep
-              self.packages.x86_64-linux.forensics.autopsy
+              self.packages.x86_64-linux.forensics.bulk-extrator
             ];
           };
       });

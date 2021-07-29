@@ -7,4 +7,6 @@ in {
   autopsy = callPackage ./autopsy {
     inherit openjfx8;
   };
+
+  bulk-extrator = callPackage ./bulk-extrator {};
 }
