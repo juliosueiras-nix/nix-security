@@ -9,4 +9,5 @@ in {
   };
 
   bulk-extrator = callPackage ./bulk-extrator {};
+  bytecode-viewer = callPackage ./bytecode-viewer {};
 }
