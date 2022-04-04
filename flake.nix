@@ -16,6 +16,7 @@
       in {
         packages = import ./pkgs/top-level.nix {
           callPackage = pkgs.callPackage;
+          lib = pkgs.lib;
         };
 
         devShell =

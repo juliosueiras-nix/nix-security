@@ -1,4 +1,4 @@
-{ callPackage, ... }:
+{ callPackage, lib, ... }:
 
 let
   base = callPackage ./base/top-level.nix { };
