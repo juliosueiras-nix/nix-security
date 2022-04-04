@@ -1,5 +1,11 @@
 # Nix Security Packages
 
+[HerculesCI](https://hercules-ci.com/github/juliosueiras-nix/nix-security)
+
+[![Cachix Cache](https://img.shields.io/badge/cachix-nixos--extra-blue.svg)](https://nixos-extra.cachix.org)
+
+
+
 These are nix packages model after [Are We Hackers Yet?](https://jjjollyjim.github.io/arewehackersyet/index.html) and aim to include every packages including removed packages from main nixpkgs repo
 
 Currently finished sections:
