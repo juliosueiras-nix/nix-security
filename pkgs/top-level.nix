@@ -16,7 +16,5 @@ in (
   (genAttrPkgs "crypto-stego" crypto-stego) //
   (genAttrPkgs "database" database) //
   (genAttrPkgs "exploitation" exploitation) //
-  (genAttrPkgs "forensics" forensics) // {
-    inherit base wifi-80211 bluetooth crypto-stego database exploitation forensics;
-  }
+  (genAttrPkgs "forensics" forensics)
 )
