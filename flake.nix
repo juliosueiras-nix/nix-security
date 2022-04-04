@@ -14,7 +14,9 @@
           config = { allowUnfree = true; };
         };
       in {
-        packages = pkgs.callPackage ./pkgs/top-level.nix {};
+        packages = import ./pkgs/top-level.nix {
+          callPackage = pkgs.callPackage;
+        };
 
         devShell =
           pkgs.mkShell { 
