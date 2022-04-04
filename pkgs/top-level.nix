@@ -11,10 +11,10 @@ let
   genAttrPkgs = pname: packages: lib.mapAttrs' (k: v: { name = "${pname}.${k}"; value = v;}) packages;
 in ( 
   (genAttrPkgs "base" base) //
-  (genAttrPkgs "wifi-80211" wifi-80211)
-  (genAttrPkgs "bluetooth" bluetooth)
-  (genAttrPkgs "crypto-stego" crypto-stego)
-  (genAttrPkgs "database" database)
-  (genAttrPkgs "exploitation" exploitation)
+  (genAttrPkgs "wifi-80211" wifi-80211) //
+  (genAttrPkgs "bluetooth" bluetooth) //
+  (genAttrPkgs "crypto-stego" crypto-stego) //
+  (genAttrPkgs "database" database) //
+  (genAttrPkgs "exploitation" exploitation) //
   (genAttrPkgs "forensics" forensics)
 )
