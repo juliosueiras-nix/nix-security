@@ -1,13 +1,13 @@
 { callPackage, lib, ... }:
 
 let
-  base = callPackage ./base/top-level.nix { };
-  wifi-80211 = callPackage ./wifi-80211/top-level.nix { };
-  bluetooth = callPackage ./bluetooth/top-level.nix { };
-  crypto-stego = callPackage ./crypto-stego/top-level.nix { };
-  database = callPackage ./database/top-level.nix { };
-  exploitation = callPackage ./exploitation/top-level.nix { };
-  forensics = callPackage ./forensics/top-level.nix { };
+  base = import ./base/top-level.nix { inherit callPackage; };
+  wifi-80211 = import ./wifi-80211/top-level.nix { inherit callPackage; };
+  bluetooth = import ./bluetooth/top-level.nix { inherit callPackage; };
+  crypto-stego = import ./crypto-stego/top-level.nix { inherit callPackage; };
+  database = import ./database/top-level.nix { inherit callPackage; };
+  exploitation = import ./exploitation/top-level.nix { inherit callPackage; };
+  forensics = import ./forensics/top-level.nix { inherit callPackage; };
   genAttrPkgs = pname: packages: lib.mapAttrs' (k: v: { name = "${pname}.${k}"; value = v;}) packages;
 in ( 
   (genAttrPkgs "base" base) // 
