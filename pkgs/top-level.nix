@@ -9,5 +9,6 @@ let
   exploitation = callPackage ./exploitation/top-level.nix { };
   forensics = callPackage ./forensics/top-level.nix { };
 in (base // wifi-80211 // bluetooth // crypto-stego // database // exploitation // forensics // {
+  "base.tightvnc" = base.tightvnc;
   inherit base wifi-80211 bluetooth crypto-stego database exploitation forensics;
 })
