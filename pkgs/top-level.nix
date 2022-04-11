@@ -16,14 +16,14 @@ in (
   (genAttrPkgs "crypto-stego" crypto-stego) //
   (genAttrPkgs "database" database) //
   (genAttrPkgs "exploitation" exploitation) //
-  (genAttrPkgs "forensics" forensics) //
-  {
-    base = base; 
-    wifi-80211 = wifi-80211;
-    bluetooth = bluetooth;
-    crypto-stego = crypto-stego;
-    database = database;
-    exploitation = exploitation;
-    forensics = forensics;
-  }
+  (genAttrPkgs "forensics" forensics)
+#  {
+#    base = base; 
+#    wifi-80211 = wifi-80211;
+#    bluetooth = bluetooth;
+#    crypto-stego = crypto-stego;
+#    database = database;
+#    exploitation = exploitation;
+#    forensics = forensics;
+#  }
 )
