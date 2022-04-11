@@ -29,6 +29,7 @@
               pkgs.arion
               pkgs.gdb
               pkgs.ripgrep
+              pkgs.nixUnstable
             ];
           };
       });
